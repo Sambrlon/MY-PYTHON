@@ -1,4 +1,5 @@
-n = int(input("Введите число:"))
+
+n = int(input("Введите число фебоначи:"))
 
 def febonacci(n):
     if n == 1:
