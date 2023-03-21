@@ -1,54 +1,76 @@
-# Define dictionaries that map each letter to a corresponding code letter for the English and Russian alphabets
-english_code_map = {'a': 'x', 'b': 'z', 'c': 'p', 'd': 'q', 'e': 'm', 'f': 'k', 'g': 'l', 'h': 'j', 'i': 'n', 'j': 'h',
-                    'k': 'f', 'l': 'g', 'm': 'e', 'n': 'i', 'o': 'r', 'p': 'c', 'q': 'd', 'r': 'o', 's': 'u', 't': 'v',
-                    'u': 's', 'v': 't', 'w': 'y', 'x': 'a', 'y': 'w', 'z': 'b'}
-russian_code_map = {'а': 'ъ', 'б': 'я', 'в': 'ч', 'г': 'ж', 'д': 'э', 'е': 'м', 'ё': 'т', 'ж': 'д', 'з': 'в', 'и': 'н',
-                    'й': 'г', 'к': 'й', 'л': 'к', 'м': 'е', 'н': 'и', 'о': 'р', 'п': 'ц', 'р': 'о', 'с': 'у', 'т': 'ы',
-                    'у': 'с', 'ф': 'щ', 'х': 'ш', 'ц': 'з', 'ч': 'ф', 'ш': 'х', 'щ': 'ъ', 'ъ': 'ь', 'ы': 'б', 'ь': 'ю',
-                    'э': 'э', 'ю': 'п', 'я': 'а'}
+import random
+import string
 
-# Define a function that generates a coded message
-def generate_code(message, code_map):
-    # Convert the message to lowercase
-    message = message.lower()
+# Define the English and Russian alphabets
+english_alphabet = string.ascii_lowercase
+russian_alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 
-    # Generate the coded message
-    coded_message = ''
-    for letter in message:
-        if letter in code_map:
-            coded_letter = code_map[letter]
+def generate_cipher(alphabet):
+    """
+    Generate a random cipher for the given alphabet
+    """
+    cipher = list(alphabet)
+    random.shuffle(cipher)
+    return ''.join(cipher)
+
+def encode(text, cipher):
+    """
+    Encode the given text using the given cipher
+    """
+    encoded_text = ''
+    for char in text:
+        if char.lower() in english_alphabet:
+            index = english_alphabet.index(char.lower())
+            if char.isupper():
+                encoded_text += cipher[index].upper()
+            else:
+                encoded_text += cipher[index]
+        elif char.lower() in russian_alphabet:
+            index = russian_alphabet.index(char.lower())
+            if char.isupper():
+                encoded_text += cipher[index].upper()
+            else:
+                encoded_text += cipher[index]
         else:
-            coded_letter = letter
-        coded_message += coded_letter
+            encoded_text += char
+    return encoded_text
 
-    return coded_message
-
-# Define a function that decodes a message step by step
-def decode_text(coded_message, code_map):
-    # Convert the coded message to lowercase
-    coded_message = coded_message.lower()
-
-    # Decode the message step by step
-    decoded_message = ''
-    for i in range(len(coded_message)):
-        if coded_message[i] in code_map:
-            decoded_letter = code_map[coded_message[i]]
+def decode(text, cipher):
+    """
+    Decode the given text using the given cipher
+    """
+    decoded_text = ''
+    for char in text:
+        if char.lower() in english_alphabet:
+            index = cipher.index(char.lower())
+            if char.isupper():
+                decoded_text += english_alphabet[index].upper()
+            else:
+                decoded_text += english_alphabet[index]
+        elif char.lower() in russian_alphabet:
+            index = cipher.index(char.lower())
+            if char.isupper():
+                decoded_text += russian_alphabet[index].upper()
+            else:
+                decoded_text += russian_alphabet[index]
         else:
-            decoded_letter = coded_message[i]
-        decoded_message += decoded_letter
-        print(f"Step {i + 1}: {decoded_message}")
+            decoded_text += char
+    return decoded_text
 
-    return decoded_message
+# Generate a cipher for the English alphabet
+english_cipher = generate_cipher(english_alphabet)
 
-# Example usage for coding
-english_message = "Hello, world!"
-russian_message = "Привет, мир!"
-english_coded_message = generate_code(english_message, english_code_map)
-russian_coded_message = generate_code(russian_message, russian_code_map)
-print(f"Coded English message: {english_coded_message}")
-print(f"Coded Russian message: {russian_coded_message}")
+# Generate a cipher for the Russian alphabet
+russian_cipher = generate_cipher(russian_alphabet)
 
-english_decoded_message = decode_text(english_coded_message, english_code_map)
-russian_decoded_message = decode_text(russian_coded_message, russian_code_map)
-print(f"Decoded English message: {english_decoded_message}")
-print(f"Decoded Russian message: {russian_decoded_message}")
+# Example usage
+text = input('напиши текст: ')
+encoded_text = encode(text, english_cipher)
+decoded_text = decode(encoded_text, english_cipher)
+print(encoded_text)
+print(decoded_text)
+
+encoded_text = encode(text, russian_cipher)
+decoded_text = decode(encoded_text, russian_cipher)
+print(encoded_text)
+print(decoded_text)
