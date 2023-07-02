@@ -5,7 +5,7 @@
 # print(s[1])
 # -----------------------------------
 
-#s = 'Алиса привет'
+# s = 'Алиса привет'
 # s = 'Улиса привет'
 
 # if s[0] == 'А':
@@ -69,6 +69,59 @@
 # print(new_email)
 # print(email)
 
-## .replace - заменяет все вхождения в строке на другую
+# .replace - заменяет все вхождения в строке на другую
 # -----------------------------------
+
+# 4.1.4
+
+# Получить часть строки можно с методом split, является расзделителем строки
+# -------------------------------
+
+# s = 'Алиса привет, как твои делишки?'
+# s = s.split(',')
+
+# print(s)
+# type(s)
+#---------------------------------
+
+# s = 'lobin@gmail.com'
+# s = s.split('@')
+
+# print(s)
+# print(s[1])
+#---------------------------------
+
+# join - объединяет N строк в одну строку
+
+# color = ['белый', 'красный', 'желтый']
+# print(', '.join(color))
+# print('.'.join(color))
+# print('|'.join(color))
+#---------------------------------
+
+# message = '''
+# Привет, мир! кто прившел изучить питон #добро пожаловать в чат!
+# Тут будем общаться с @sambrlon'''
+
+# people_mentioned = []
+# tags_mentioned = []
+
+# text = message.replace(',', '')
+
+# words = text.split(' ')
+
+# for word in words:
+#     # if word[0] == '#':
+#     if word.startswith('#'):
+#         tags_mentioned.append(word)
+#     elif word.startswith('@'):
+#         people_mentioned.append(word)
+
+# people_mentioned_joined = ' '.join(people_mentioned)
+# tags_mentioned_joined = ' '.join(tags_mentioned)
+
+# print(f'Упомянутые люди: {people_mentioned_joined}')
+# print(f'Упомянутые теги: {tags_mentioned_joined}')
+#---------------------------------
+
 
