@@ -51,3 +51,4 @@ print(
     f'Ты заработал {user_score} баллов!\n'
     f'Это {user_percentage} процентов.\n'
 )
+
