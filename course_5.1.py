@@ -78,6 +78,48 @@
 
 # 5.1.4
 
+# import random
+# def random_gifts():
+#     gifts = ['яблоки', 'мандарины', 'груши', 'бананы', 'персик']
+
+#     random.shuffle(gifts)
+#     gift = gifts[0]
+
+#     return gift
+
+# while True:
+#     input()
+#     gift = random_gifts()
+#     print(f'Вы выиграли, {gift}')
+#--------------------------------------
+
+# 5.1.5
+
+# def with_tax(value, tax_percenage):
+#     total = value + value * tax_percenage / 100
+
+#     return total
+
+# salary = 10000
+# income_tax = 6
+
+# total = with_tax(salary, income_tax)
+
+# print(total)
+#---------------------------
+
+a = 3
+print('Global a', a)
+
+def fun():
+    a = 4
+    print('Local a', a)
+
+
+fun()
+
+print('Global a', a)
+
 
 
 
